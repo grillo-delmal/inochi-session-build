@@ -1,0 +1,33 @@
+[submodule "src/inochi-session"]
+	path = src/inochi-session
+	url = https://github.com/Inochi2D/inochi-session.git
+[submodule "src/inochi2d"]
+	path = src/inochi2d
+	url = https://github.com/Inochi2D/inochi2d.git
+[submodule "src/bindbc-imgui"]
+	path = src/bindbc-imgui
+	url = https://github.com/Inochi2D/bindbc-imgui.git
+[submodule "src/gitver"]
+	path = src/gitver
+	url = https://github.com/Inochi2D/gitver.git
+[submodule "src/facetrack-d"]
+	path = src/facetrack-d
+	url = https://github.com/Inochi2D/facetrack-d.git
+[submodule "src/inui"]
+	path = src/inui
+	url = https://github.com/Inochi2D/inui.git
+[submodule "src/i18n"]
+	path = src/i18n
+	url = https://github.com/KitsunebiGames/i18n.git
+[submodule "src/fghj"]
+	path = src/fghj
+	url = https://github.com/Inochi2D/fghj.git
+[submodule "src/inmath"]
+	path = src/inmath
+	url = https://github.com/Inochi2D/inmath.git
+[submodule "src/vmc-d"]
+	path = src/vmc-d
+	url = https://github.com/Inochi2D/vmc-d.git
+[submodule "src/bindbc-spout2"]
+	path = src/bindbc-spout2
+	url = https://github.com/Inochi2D/bindbc-spout2.git
