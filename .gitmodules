@@ -31,3 +31,6 @@
 [submodule "src/bindbc-spout2"]
 	path = src/bindbc-spout2
 	url = https://github.com/Inochi2D/bindbc-spout2.git
+[submodule "src/mir-algorithm"]
+	path = src/mir-algorithm
+	url = https://github.com/libmir/mir-algorithm.git

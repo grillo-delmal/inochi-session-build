@@ -22,6 +22,7 @@ podman run -ti --rm \
     -v $(pwd)/src/inui:/opt/orig/inui/:ro,Z \
     -v $(pwd)/src/vmc-d:/opt/orig/vmc-d/:ro,Z \
     -v $(pwd)/src/i18n:/opt/orig/i18n/:ro,Z \
+    -v $(pwd)/src/mir-algorithm:/opt/orig/mir-algorithm/:ro,Z \
     -e DEBUG=${DEBUG} \
     localhost/inochi-session-build:latest
 

@@ -22,6 +22,7 @@ rsync -r /opt/orig/inui/ /opt/src/inui/
 rsync -r /opt/orig/vmc-d/ /opt/src/vmc-d/
 rsync -r /opt/orig/i18n/ /opt/src/i18n/
 rsync -r /opt/orig/bindbc-spout2/ /opt/src/bindbc-spout2/
+rsync -r /opt/orig/mir-algorithm/ /opt/src/mir-algorithm/
 
 # Add dlang deps
 dub add-local /opt/src/inochi2d/        "$(semver /opt/src/inochi2d/)"
@@ -33,7 +34,8 @@ dub add-local /opt/src/inmath/          "$(semver /opt/src/inmath/)"
 dub add-local /opt/src/inui/            "$(semver /opt/src/inui/ 1.0.0)"
 dub add-local /opt/src/vmc-d/           "$(semver /opt/src/vmc-d/)"
 dub add-local /opt/src/i18n/            "$(semver /opt/src/i18n/)"
-dub add-local /opt/src/bindbc-spout2/    "$(semver /opt/src/bindbc-spout2/)"
+dub add-local /opt/src/bindbc-spout2/   "$(semver /opt/src/bindbc-spout2/)"
+dub add-local /opt/src/mir-algorithm/   "$(semver /opt/src/mir-algorithm/)"
 
 # Build bindbc-imgui deps
 pushd src
