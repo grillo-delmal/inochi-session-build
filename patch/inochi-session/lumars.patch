@@ -1,22 +1,57 @@
 diff --git a/dub.sdl b/dub.sdl
-index f11c41e..117fddb 100644
+index f11c41e..038e126 100644
 --- a/dub.sdl
 +++ b/dub.sdl
-@@ -36,6 +36,8 @@ dflags "-mscrtlib=msvcrt" platform="windows-ldc"    // Use the dynamic CRT on Wi
+@@ -36,6 +36,9 @@ dflags "-mscrtlib=msvcrt" platform="windows-ldc"    // Use the dynamic CRT on Wi
  configuration "barebones" {
  	platforms "linux"
  	targetType "executable"
 +
 +	subConfiguration "lumars" "lua51-dynamic"
++	versions "LUA_51"
  }
  
  configuration "win32-barebones" {
-@@ -62,6 +64,8 @@ configuration "full" {
+@@ -62,6 +65,9 @@ configuration "full" {
  
  	targetType "executable"
  	versions "InBranding"
 +
 +	subConfiguration "lumars" "lua51-dynamic"
++	versions "LUA_51"
  }
  
  configuration "osx-full" {
+diff --git a/source/session/plugins/package.d b/source/session/plugins/package.d
+index 965c64f..495da6c 100644
+--- a/source/session/plugins/package.d
++++ b/source/session/plugins/package.d
+@@ -34,14 +34,13 @@ Plugin[] insPlugins;
+     Initializes Lua support
+ */
+ void insLuaInit() {
+-    // LuaSupport support = loadLua();
+-
+-    // if (support == LuaSupport.noLibrary || support == LuaSupport.badLibrary) {
+-    //     couldLoadLua = false;
+-    //     insLogWarn("Could not load Lua support...");
+-    // } else insLogInfo("Lua support initialized.");
+-    insLogInfo("Lua support initialized. (Statically linked for now)");
++    LuaSupport support = loadLua("libluajit-5.1.so.2");
+ 
++    if (support == LuaSupport.noLibrary || support == LuaSupport.badLibrary) {
++        couldLoadLua = false;
++        insLogWarn("Could not load Lua support...");
++    } else insLogInfo("Lua support initialized.");
++    
+     // Create Lua state
+     state = new LuaState(luaL_newstate());
+ 
+@@ -55,6 +54,7 @@ void insLuaInit() {
+ 
+ void insLuaUnload() {
+     lua_close(state.handle());
++    unloadLua();
+     destroy(state);
+ }
+ 
