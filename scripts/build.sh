@@ -54,19 +54,19 @@ mkdir -p deps/build_linux_x64_cimguiDynamic
 ARCH=$(uname -m)
 if [ "${ARCH}" == 'x86_64' ]; then
     if [[ -z ${DEBUG} ]]; then
-        cmake -DSTATIC_CIMGUI= -S deps -B deps/build_linux_x64_cimguiStatic
-        cmake --build deps/build_linux_x64_cimguiStatic --config Release
+        cmake -S deps -B deps/build_linux_x64_cimguiDynamic
+        cmake --build deps/build_linux_x64_cimguiDynamic --config Release
     else
-        cmake -DCMAKE_BUILD_TYPE=Debug -DSTATIC_CIMGUI= -S deps -B deps/build_linux_x64_cimguiStatic
-        cmake --build deps/build_linux_x64_cimguiStatic --config Debug
+        cmake -DCMAKE_BUILD_TYPE=Debug -S deps -B deps/build_linux_x64_cimguiDynamic
+        cmake --build deps/build_linux_x64_cimguiDynamic --config Debug
     fi
 elif [ "${ARCH}" == 'aarch64' ]; then
     if [[ -z ${DEBUG} ]]; then
-        cmake -DSTATIC_CIMGUI= -S deps -B deps/build_linux_aarch64_cimguiStatic
-        cmake --build deps/build_linux_aarch64_cimguiStatic --config Release
+        cmake -S deps -B deps/build_linux_aarch64_cimguiDynamic
+        cmake --build deps/build_linux_aarch64_cimguiDynamic --config Release
     else
-        cmake -DCMAKE_BUILD_TYPE=Debug -DSTATIC_CIMGUI= -S deps -B deps/build_linux_aarch64_cimguiStatic
-        cmake --build deps/build_linux_aarch64_cimguiStatic --config Debug
+        cmake -DCMAKE_BUILD_TYPE=Debug -S deps -B deps/build_linux_aarch64_cimguiDynamic
+        cmake --build deps/build_linux_aarch64_cimguiDynamic --config Debug
     fi
 fi
 
