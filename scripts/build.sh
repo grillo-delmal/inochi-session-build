@@ -23,6 +23,17 @@ rsync -r /opt/orig/vmc-d/ /opt/src/vmc-d/
 rsync -r /opt/orig/i18n/ /opt/src/i18n/
 rsync -r /opt/orig/bindbc-spout2/ /opt/src/bindbc-spout2/
 
+# apply patches
+
+pushd patch
+for d in */ ; do
+    for p in ${d}*.patch; do
+        echo "patch /opt/patch/$p"
+        git -C /opt/src/${d} apply /opt/patch/$p
+    done
+done
+popd
+
 # Add dlang deps
 dub add-local /opt/src/inochi2d/        "$(semver /opt/src/inochi2d/)"
 dub add-local /opt/src/gitver/          "$(semver /opt/src/gitver/)"
@@ -33,19 +44,30 @@ dub add-local /opt/src/inmath/          "$(semver /opt/src/inmath/)"
 dub add-local /opt/src/inui/            "$(semver /opt/src/inui/ 1.0.0)"
 dub add-local /opt/src/vmc-d/           "$(semver /opt/src/vmc-d/)"
 dub add-local /opt/src/i18n/            "$(semver /opt/src/i18n/)"
-dub add-local /opt/src/bindbc-spout2/    "$(semver /opt/src/bindbc-spout2/)"
+dub add-local /opt/src/bindbc-spout2/   "$(semver /opt/src/bindbc-spout2/)"
 
 # Build bindbc-imgui deps
 pushd src
 pushd bindbc-imgui
 mkdir -p deps/build_linux_x64_cimguiDynamic
 
-if [[ -z ${DEBUG} ]]; then
-    cmake -S deps -B deps/build_linux_x64_cimguiDynamic
-    cmake --build deps/build_linux_x64_cimguiDynamic --config Release
-else
-    cmake -DCMAKE_BUILD_TYPE=Debug -S deps -B deps/build_linux_x64_cimguiDynamic
-    cmake --build deps/build_linux_x64_cimguiDynamic --config Debug
+ARCH=$(uname -m)
+if [ "${ARCH}" == 'x86_64' ]; then
+    if [[ -z ${DEBUG} ]]; then
+        cmake -DSTATIC_CIMGUI= -S deps -B deps/build_linux_x64_cimguiStatic
+        cmake --build deps/build_linux_x64_cimguiStatic --config Release
+    else
+        cmake -DCMAKE_BUILD_TYPE=Debug -DSTATIC_CIMGUI= -S deps -B deps/build_linux_x64_cimguiStatic
+        cmake --build deps/build_linux_x64_cimguiStatic --config Debug
+    fi
+elif [ "${ARCH}" == 'aarch64' ]; then
+    if [[ -z ${DEBUG} ]]; then
+        cmake -DSTATIC_CIMGUI= -S deps -B deps/build_linux_aarch64_cimguiStatic
+        cmake --build deps/build_linux_aarch64_cimguiStatic --config Release
+    else
+        cmake -DCMAKE_BUILD_TYPE=Debug -DSTATIC_CIMGUI= -S deps -B deps/build_linux_aarch64_cimguiStatic
+        cmake --build deps/build_linux_aarch64_cimguiStatic --config Debug
+    fi
 fi
 
 popd

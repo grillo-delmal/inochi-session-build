@@ -10,6 +10,7 @@ podman unshare chown $UID:$UID -R $(pwd)/build_out
 
 podman run -ti --rm \
     -v $(pwd)/build_out:/opt/out/:Z \
+    -v $(pwd)/patch:/opt/patch/:Z \
     -v $(pwd)/.git:/opt/.git/:ro,Z \
     -v $(pwd)/src/inochi2d:/opt/orig/inochi2d/:ro,Z \
     -v $(pwd)/src/inochi-session:/opt/orig/inochi-session/:ro,Z \

@@ -1,0 +1,22 @@
+diff --git a/dub.sdl b/dub.sdl
+index f11c41e..117fddb 100644
+--- a/dub.sdl
++++ b/dub.sdl
+@@ -36,6 +36,8 @@ dflags "-mscrtlib=msvcrt" platform="windows-ldc"    // Use the dynamic CRT on Wi
+ configuration "barebones" {
+ 	platforms "linux"
+ 	targetType "executable"
++
++	subConfiguration "lumars" "lua51-dynamic"
+ }
+ 
+ configuration "win32-barebones" {
+@@ -62,6 +64,8 @@ configuration "full" {
+ 
+ 	targetType "executable"
+ 	versions "InBranding"
++
++	subConfiguration "lumars" "lua51-dynamic"
+ }
+ 
+ configuration "osx-full" {

@@ -18,6 +18,9 @@ RUN dnf update -y \
         dub \
         git
 
+RUN dnf install -y \
+        luajit-devel
+
 ADD scripts /opt/build
 
 WORKDIR /opt/build/
